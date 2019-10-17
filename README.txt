@@ -1,28 +1,27 @@
-SRF05 - HY-SRF05 and SR04 sensors library
-by Alex Palmese - docdoc@sertel.net - Arduino forum: docdoc
+SRF05 - Libreria per la gestione del sensore ultrasuoni SRF05/SR04
+by Dotto59 - dotto59alex@gmail.com - Arduino forum: docdoc
+Versione 1.2 - 17/10/2019
 
-Version 1.2 - 17/10/2019
-
-After installing the library, open the example:
+Dopo aver installato la libreria, aprire l'esempio per mostrare l'uso:
 ---------------------------------------------
-// SENSOR DEMO
 #include "SRF05.h"
 
-// trigPin, echoPin, MaxDist, readInterval
+// TrigPin, EchoPin, <MaxDistance>, <ReadInterval>
 SRF05 Sensor(6, 7, 200, 500);
 
 void setup() {
     Serial.begin(9600);
-	// If using SR04 enable the following line:
-	//Sensor.Unlock = true;
+    // Se si usa un SR04 e questo sembra restituire sempre 
+    // 0, abilitare la riga successiva:
+    //Sensor.Unlock = true;
 }
 
 void loop() {
-    // Distance read
+    // Leggo la distanza
     if ( Sensor.Read() > -1 ) {
-        // New distance reading!
+        // Ha fatto una nuova lettura!
         if ( Sensor.Distance == 0 ) {
-            Serial.println("Out of range");
+            Serial.println("Fuori portata");
         } else {
             // -------------
             Serial.print("Dist: ");
@@ -33,27 +32,28 @@ void loop() {
 }
 ---------------------------------------------
 
-As you can see, create an SRF05 object with all configuration parameters:
-  TrigPin: digital pin for Trig
-  EchoPin: digital pin for Echo
-  MaxDist: max measuring distance (cm); optional, default=300 (3mt) 
-  ReadInterval: interval between measures(millis); optional, default=0
+Come si vede, basta creare l'oggetto SRF05 specificando i parametri di configurazione, nell'ordine:
+  TrigPin: pin digitale collegato a Trig
+  EchoPin: pin digitale collegato a Echo
+  MaxDist: distanza massima di misurazione (cm); opzionale, default=300 (3mt) 
+  ReadInterval: intervallo tra acquisizioni (millis); opzionale, default=0
 
-The first two don't need particular explanations, the third specifies the maximum distance we want to measure, usually not higher than sensor range.
-ReadInterval makes it easy to manage reading intervals without a specific timer: usually we don't check the distance on every loop() call, so set ReadInterval to the desired milliseconds and the library will do the job. If you need to read continuously simpy set ReadInterval=0.
+I primi due non hanno bisogno di spiegazioni. 
+Il terzo penso sia abbastanza chiaro, comunque specifica la distanza massima che vogliamo misurare, ossia si specifica il valore massimo per il quale il sensore fornisce risultati affidabili.
+Per l'ultimo bisogna spiegare meglio. Generalmente il sensore si utilizza per oggetti in movimento, per i quali non è generalmente necessario effettuare misurazioni ad ogni ciclo di loop (anche per evitare di far perdere tempo alla CPU). Per semplificare questa gestione, ho implementato quindi un metodo per evitare misurazioni ad intervalli di tempo inferiori a "readInterval". Se vogliamo usare la libreria per leggere continuamente dal sensore, basta impostare a zero il parametro.
 
-This way, the loop() calls only the "Read()" method: it returns measured distance in centimeters but if called before "ReadInterval" milliseconds after the last read, it returns "-1" meaning "it's not the time!". 8)
-If called after ReadInterval milliseconds or more, performs a new ping and returns the updated distance. If the sensor doesn't read obstacles within the range (no echo or echo after "MadDist" cm), the Read() method returns zero.
+Passiamo quindi all'uso. 
+Come vedete, ha un solo metodo, "Read()" il quale restituisce la distanza misurata, in centimetri. 
+Se viene invocato prima di "readInterval" millisecondi, la Read() restituisce il valore "-1" che significa "non è ancora tempo di leggere la distanza, non mi rompere". 8) 
+Se viene invocato oltre il tempo minimo, effettua la nuova lettura e restituisce la nuova distanza. 
+Se il sensore non rileva ostacoli o l'ostacolo si trova ad una distanza maggiore di "MaxDist", il metodo restituisce zero.
 
-Apart from Read(), some public properties are available including constructor parameters and latest measured distance:
+Oltre al valore restituito dalla Read() sono disponibili varie proprietà pubbliche, ossia i parametri del costruttore più l'ultima distanza misurata:
   int TrigPin;
   int EchoPin;
   long MaxDistance;
   long ReadInterval;
-  long Distance; // Last Read()
+  long Distance; // l'ultima lettura effettuata dalla Read()
 
-Version 1.1 includes a workaround for "locking" SR04 sensors when no echo is received. To enable this feature simply set "Unlock=true;" inside "setup()", as shown in the example.
+Nella versione 1.1 della libreria, per i sensori SR04 che in alcuni casi sembrano "bloccarsi" quando non ricevono alcun echo dopo il timeout e restituiscono sempre zero anche quando un oggetto entra nel campo. Per attivare questa "patch" basta impostare "Unlock = true;" dopo l'inizializzazione, come mostrato nell'esempio all'interno della funzione "setup()".
 
-Hope you enjoy the library!
-
- - Alex Palmese

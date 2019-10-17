@@ -1,4 +1,12 @@
-// SENSOR DEMO
+/*
+***** SENSOR DEMO *****
+
+SRF05 - HY-SRF05 and SR04 sensor library
+by Dotto59 - dotto59alex@gmail.com
+Arduino forum: docdoc
+
+Versione 1.2 - 17/10/2019
+*/
 #include "SRF05.h"
 
 // trigPin, echoPin, MaxDist, readInterval

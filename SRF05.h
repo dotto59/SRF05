@@ -1,3 +1,10 @@
+/*
+SRF05 - HY-SRF05 and SR04 sensor library
+by Dotto59 - dotto59alex@gmail.com
+Arduino forum: docdoc
+
+Versione 1.2 - 17/10/2019
+*/
 #ifndef SRF05_h
 #define SRF05_h
 #include "Arduino.h"
@@ -7,23 +14,25 @@
 class SRF05
 {
 public:
-    // Costruttore
-    SRF05(int Trig, int Echo, int MaxDist, int Interval);
-    SRF05(int Trig, int Echo, int MaxDist);
-    SRF05(int Trig, int Echo);
-    // Metodi
-    float Read();
-    // Proprietà pubbliche
-    float Distance;
-    int TrigPin;
-    int EchoPin;
-	float MaxDistance;
-    int ReadInterval;
-    float PrevDistance;
-	boolean Unlock;
+  // Constructors
+  SRF05(int Trig, int Echo, int MaxDist, int Interval);
+  SRF05(int Trig, int Echo, int MaxDist);
+  SRF05(int Trig, int Echo);
+  
+  // Methods
+  float Read();
+  
+  // Properties
+  int ReadInterval;
+  int TrigPin;
+  int EchoPin;
+  float Distance;
+  float MaxDistance;
+  boolean Unlock;
 
 private:
-    long lastPing;
+  float prevDistance;
+  long lastPing;
 
 };
 
