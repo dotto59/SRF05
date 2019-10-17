@@ -1,5 +1,5 @@
-by Alex Palmese - alex.palmese@gmail.com
-Arduino forum: docdoc
+SRF05 - Libreria per Arduino per la gestione del sensore ad ultrasuoni
+by Alex Palmese - alex.palmese@gmail.com Arduino forum: docdoc
 Versione: 1.2
 
 La libreria consente di gestire più comodamente i sensori ad ultrasuoni come gli HY-SRF05 (consigliati) ma anche i meno performanti SRF04 (sconsigliati).
