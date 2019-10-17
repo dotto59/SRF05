@@ -1,6 +1,7 @@
 SRF05 - HY-SRF05 and SR04 sensors library
-by Alex Palmese - docdoc@sertel.net
-Arduino forum: docdoc
+by Alex Palmese - docdoc@sertel.net - Arduino forum: docdoc
+
+Version 1.2 - 17/10/2019
 
 After installing the library, open the example:
 ---------------------------------------------
