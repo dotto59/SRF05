@@ -1,6 +1,7 @@
 SRF05 - Libreria per la gestione del sensore ultrasuoni SRF05/SR04
-by Alex Palmese - docdoc@sertel.net
-Arduino forum: docdoc
+by Alex Palmese - docdoc@sertel.net - Arduino forum: docdoc
+
+Versione 1.2 - 17/10/2019
 
 Dopo aver installato la libreria, aprire l'esempio per mostrare l'uso:
 ---------------------------------------------
@@ -40,15 +41,15 @@ Come si vede, basta creare l'oggetto SRF05 specificando i parametri di configura
 
 I primi due non hanno bisogno di spiegazioni. 
 Il terzo penso sia abbastanza chiaro, comunque specifica la distanza massima che vogliamo misurare, ossia si specifica il valore massimo per il quale il sensore fornisce risultati affidabili.
-Per l'ultimo bisogna spiegare meglio. Generalmente il sensore si utilizza per oggetti in movimento, per i quali non è generalmente necessario effettuare misurazioni ad ogni ciclo di loop (anche per evitare di far perdere tempo alla CPU). Per semplificare questa gestione, ho implementato quindi un metodo per evitare misurazioni ad intervalli di tempo inferiori a "readInterval". Se vogliamo usare la libreria per leggere continuamente dal sensore, basta impostare a zero il parametro.
+Per l'ultimo bisogna spiegare meglio. Generalmente il sensore si utilizza per oggetti in movimento, per i quali non Ã¨ generalmente necessario effettuare misurazioni ad ogni ciclo di loop (anche per evitare di far perdere tempo alla CPU). Per semplificare questa gestione, ho implementato quindi un metodo per evitare misurazioni ad intervalli di tempo inferiori a "readInterval". Se vogliamo usare la libreria per leggere continuamente dal sensore, basta impostare a zero il parametro.
 
 Passiamo quindi all'uso. 
 Come vedete, ha un solo metodo, "Read()" il quale restituisce la distanza misurata, in centimetri. 
-Se viene invocato prima di "readInterval" millisecondi, la Read() restituisce il valore "-1" che significa "non è ancora tempo di leggere la distanza, non mi rompere". 8) 
+Se viene invocato prima di "readInterval" millisecondi, la Read() restituisce il valore "-1" che significa "non Ã¨ ancora tempo di leggere la distanza, non mi rompere". 8) 
 Se viene invocato oltre il tempo minimo, effettua la nuova lettura e restituisce la nuova distanza. 
 Se il sensore non rileva ostacoli o l'ostacolo si trova ad una distanza maggiore di "MaxDist", il metodo restituisce zero.
 
-Oltre al valore restituito dalla Read() sono disponibili varie proprietà pubbliche, ossia i parametri del costruttore più l'ultima distanza misurata:
+Oltre al valore restituito dalla Read() sono disponibili varie proprietÃ  pubbliche, ossia i parametri del costruttore piÃ¹ l'ultima distanza misurata:
   int TrigPin;
   int EchoPin;
   long MaxDistance;
