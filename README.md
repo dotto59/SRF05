@@ -8,17 +8,14 @@ Versione: 1.2<br />
 <p>Per utilizzarla, collegare il sensore correttamente (Vcc e GND, più 2 pin digitali uno per Trig l'altro per Echo), quindi nello sketch utilizzare la classe SRF05. Iniziamo da un piccolo sketch per mostrare l'uso:</p>
 <p>
 <code>#include "SRF05.h"
-
-// TrigPin, EchoPin, <MaxDistance>, <ReadInterval>
+// TrigPin, EchoPin, &lt;MaxDistance&gt;, &lt;ReadInterval&gt;
 SRF05 Sensor(6, 7, 200, 500);
-
 void setup() {
     Serial.begin(9600);
     // Se si usa un SR04 e questo sembra restituire sempre 
     // 0, abilitare la riga successiva:
     //Unblock = true;
 }
-
 void loop() {
     // Leggo la distanza
     if ( Sensor.Read() &gt; -1 ) {
@@ -32,14 +29,13 @@ void loop() {
             Serial.println(" cm");
         }
     }
-}</code>
-</p>
-Come si vede, basta creare l'oggetto SRF05 specificando i parametri di configurazione, nell'ordine:
+}</code></p>
+<p>Come si vede, basta creare l'oggetto SRF05 specificando i parametri di configurazione, nell'ordine:
   TrigPin: pin digitale collegato a Trig
   EchoPin: pin digitale collegato a Echo
   MaxDist: distanza massima di misurazione (cm); opzionale, default=300 (3mt) 
   ReadInterval: intervallo tra acquisizioni (millis); opzionale, default=0
-
+</p>
 I primi due non hanno bisogno di spiegazioni. 
 Il terzo penso sia abbastanza chiaro, comunque specifica la distanza massima che vogliamo misurare, ossia si specifica il valore massimo per il quale il sensore fornisce risultati affidabili.
 
