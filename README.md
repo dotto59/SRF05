@@ -1,14 +1,12 @@
 # SRF05
-Libreria Arduino per la gestione del sensore ad ultrasuoni
-by Alex Palmese - alex.palmese@gmail.com
-Arduino forum: docdoc
-Versione: 1.2
-
-La libreria consente di gestire più comodamente i sensori ad ultrasuoni come gli HY-SRF05 (consigliati) ma anche i meno performanti SRF04 (sconsigliati).
-
-Per utilizzarla, collegare il sensore correttamente (Vcc e GND, più 2 pin digitali uno per Trig l'altro per Echo), quindi nello sketch utilizzare la classe SRF05. Iniziamo da un piccolo sketch per mostrare l'uso:
-
----------------------------------------------
+<p>Libreria Arduino per la gestione del sensore ad ultrasuoni<br />
+by Alex Palmese - alex.palmese@gmail.com<br />
+Arduino forum: docdoc<br />
+Versione: 1.2<br />
+</p>
+<p>La libreria consente di gestire più comodamente i sensori ad ultrasuoni come gli HY-SRF05 (consigliati) ma anche i meno performanti SRF04 (sconsigliati).</p>
+<p>Per utilizzarla, collegare il sensore correttamente (Vcc e GND, più 2 pin digitali uno per Trig l'altro per Echo), quindi nello sketch utilizzare la classe SRF05. Iniziamo da un piccolo sketch per mostrare l'uso:</p>
+<p>
 #include "SRF05.h"
 
 // TrigPin, EchoPin, <MaxDistance>, <ReadInterval>
@@ -17,15 +15,13 @@ SRF05 Sensor(6, 7, 200, 500);
 void setup() {
     Serial.begin(9600);
     // Se si usa un SR04 e questo sembra restituire sempre 
-    // 0, abilitare
- la riga successiva:
-
+    // 0, abilitare la riga successiva:
     //Unblock = true;
 }
 
 void loop() {
     // Leggo la distanza
-    if ( Sensor.Read() > -1 ) {
+    if ( Sensor.Read() &gt; -1 ) {
         // Ha fatto una nuova lettura!
         if ( Sensor.Distance == 0 ) {
             Serial.println("Fuori portata");
@@ -37,8 +33,7 @@ void loop() {
         }
     }
 }
----------------------------------------------
-
+</p>
 Come si vede, basta creare l'oggetto SRF05 specificando i parametri di configurazione, nell'ordine:
   TrigPin: pin digitale collegato a Trig
   EchoPin: pin digitale collegato a Echo
