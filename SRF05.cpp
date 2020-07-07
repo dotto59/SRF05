@@ -55,13 +55,13 @@ float SRF05::Read() {
     Distance = 0.034F * pulseDuration / 2;
     
     // SRF05 "phantom" 3 cm distance override
-    if ( Distance > MaxDistance || ( Distance == 3 && prevDistance == 0 ) ) {
+    if ( Distance > MaxDistance || ( Distance == 3 && prevDistance == 0 ) )
       Distance = 0;
-      prevDistance = Distance;
-      return Distance;
-    } else {
-      // Not yet...
-      return -1;
-    }
+
+    prevDistance = Distance;
+    return Distance;
+  } else {
+    // Not yet...
+    return -1;
   }
 }
