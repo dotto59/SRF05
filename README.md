@@ -1,8 +1,8 @@
 # SRF05
 <h2>Libreria Arduino per la gestione del sensore ad ultrasuoni</h2>
-<p>by Alex Palmese - alex.palmese@gmail.com<br />
+<p>by Dotto59 - dotto59alex@gmail.com<br />
 Arduino forum: docdoc<br />
-Versione: 1.2<br />
+Versione: 1.2.1<br />
 </p>
 <p>La libreria consente di gestire più comodamente i sensori ad ultrasuoni come gli HY-SRF05 (consigliati) ma anche i meno performanti SRF04 (sconsigliati).</p>
 <p>Come vedete, la libreria ha un solo metodo, "Read()" il quale restituisce la distanza misurata, in centimetri. 
@@ -14,6 +14,9 @@ Se il sensore non rileva ostacoli o l'ostacolo si trova ad una distanza maggiore
 
 <hr>
 <h2>RELEASE HISTORY</h2>
+
+<h3>Versione 1.2.1</h3>
+Alcuni bug fix minori e correzione del metodo read().
 
 <h3>Versione 1.2</h3>
 Migliorato il calcolo della distanza per sfruttare le precisione massima della funzione pulseIn() di 10 microsecondi corrispondenti a circa 3 mm (grazie a Claudio_FF del forum Arduino!); Pubblicazione della libreria su GitHub.

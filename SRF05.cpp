@@ -3,24 +3,10 @@ SRF05 - HY-SRF05 and SR04 sensor library
 by Dotto59 - dotto59alex@gmail.com
 Arduino forum: docdoc
 
-Versione 1.2 - 17/10/2019
+Versione 1.2.1 - 07/07/2020
 */
 #include "Arduino.h"
 #include "SRF05.h"
-
-// ------------------------------------------------
-// VARIABILES
-// ------------------------------------------------
-// Public
-int ReadInterval;
-int TrigPin;
-int EchoPin;
-float Distance;	// 0=out of range
-float MaxDistance;
-boolean Unlock = false;
-// Private
-float prevDistance;
-long lastPing;
 
 // ------------------------------------------------
 // METHODS
@@ -41,8 +27,9 @@ SRF05::SRF05(int Trig, int Echo, int MaxDist, int Interval) {
     
 	MaxDistance = MaxDist;
   Distance = 0;
-  PrevDistance = 0;
+  prevDistance = 0;
   lastPing = -1;
+  Unlock = false;
 }
 
 float SRF05::Read() {
@@ -68,12 +55,13 @@ float SRF05::Read() {
     Distance = 0.034F * pulseDuration / 2;
     
     // SRF05 "phantom" 3 cm distance override
-    if ( Distance > MaxDistance || ( Distance == 3 && PrevDistance == 0 ) )
+    if ( Distance > MaxDistance || ( Distance == 3 && prevDistance == 0 ) ) {
       Distance = 0;
-      PrevDistance = Distance;
+      prevDistance = Distance;
       return Distance;
     } else {
       // Not yet...
       return -1;
+    }
   }
 }
