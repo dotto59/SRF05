@@ -13,10 +13,10 @@ Versione 1.2.1 - 07/07/2020
 // ------------------------------------------------
 // *** Constructors
 SRF05::SRF05(int Trig, int Echo) {
-	SRF05(Trig,Echo,300,0);
+  SRF05(Trig,Echo,300,0);
 }
 SRF05::SRF05(int Trig, int Echo, int MaxDist) {
-	SRF05(Trig,Echo,MaxDist,0);
+  SRF05(Trig,Echo,MaxDist,0);
 }
 SRF05::SRF05(int Trig, int Echo, int MaxDist, int Interval) {
   TrigPin = Trig;
@@ -25,7 +25,7 @@ SRF05::SRF05(int Trig, int Echo, int MaxDist, int Interval) {
   pinMode(TrigPin, OUTPUT);
   pinMode(EchoPin, INPUT);
     
-	MaxDistance = MaxDist;
+  MaxDistance = MaxDist;
   Distance = 0;
   prevDistance = 0;
   lastPing = -1;
@@ -33,7 +33,7 @@ SRF05::SRF05(int Trig, int Echo, int MaxDist, int Interval) {
 }
 
 float SRF05::Read() {
-	// Ping interval
+  // Ping interval
   if ( lastPing == -1 || millis() - lastPing >= ReadInterval ) {
     lastPing = millis();
     // ping procedure
